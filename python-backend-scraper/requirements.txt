@@ -1,0 +1,7 @@
+flask
+flask-cors
+flask-restful
+requests
+beautifulsoup4
+regex
+waitress
