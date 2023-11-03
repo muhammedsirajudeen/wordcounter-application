@@ -70,7 +70,7 @@ export default function Home() {
   return (
     <>
      <Navbar/>
-      <div className={` flex w-screen h-screen items-center flex-col justify-center ${weblink? "blur" :""} `}>
+      <div className={` flex w-screen h-screen items-center flex-col justify-center ${weblink? "blur" :""} ${medialink?"blur":""} `}>
      
         <div className='flex flex-col items-center justify-evenly h-40'>
             <input className="text-black" type="text" placeholder="enter website url" value={url} onChange={(e)=>setUrl(e.target.value)}  ></input>
