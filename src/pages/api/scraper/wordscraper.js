@@ -17,7 +17,6 @@ export default async function handler(req,res){
             let doc=await newInsight.save()
             console.log(doc.domain)
             res.status(200).json({message:"success",_id:doc._id.toHexString(),domain:url,wordlength:doc.wordlength,hyperlinks:doc.hyperlinks,medialinks:doc.medialinks})
-            res.status(200).json({message:"error"})
         }catch(error){
             console.log(error)
             res.status(500).json({message:"error"})
