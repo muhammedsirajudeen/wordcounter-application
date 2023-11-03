@@ -34,7 +34,7 @@ export default function Home() {
     setClicked(true)
 
     setLoading(true)
-    let response=(await axios.post("/api/scraper/wordscraper",
+    let response=(await axios.post(process.env.NEXT_PUBLIC_URL+"/api/scraper/wordscraper",
     {
       url:url
     }
