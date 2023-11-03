@@ -8,6 +8,10 @@ if (mongoose.models && mongoose.models.Insights) {
     {
         domain:String,
         wordlength:Number,
+        favorite:{
+          type:Boolean,
+          default:false
+        },
         hyperlinks:[String],
         medialinks:[String]
 

@@ -18,6 +18,13 @@ body{
   height: 50px;
   animation: spin 2s linear infinite;
 }
+.blur{
+  filter: blur(10px);
+}
+.weblinkcontainer{
+  overflow-y: scroll;
+
+}
 
 @keyframes spin {
   0% { transform: rotate(0deg); }

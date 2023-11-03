@@ -2,13 +2,17 @@ import Navbar from "@/components/Navbar"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import Image from "next/image"
+import WebLink from "@/components/WebLink"
 export default function Home() {
   const [url,setUrl]=useState("https://")
   const [clicked,setClicked]=useState(false)
   const httpUrlRegex = /^https?:\/\/[^\s/$.?#].[^\s]*$/i;
   const [loading,setLoading]=useState(false)
   const [insight,setInsight]=useState(undefined)
+  const [weblink,setWeblink]=useState(false)
+  const [medialink,setMedialink]=useState(false)
   const [fav,setFav]=useState(false)
+  const [id,setId]=useState("")
   useEffect(()=>{
     async function preloadDB(){
       let response=(await axios.get("/api/hello")).data
@@ -36,23 +40,37 @@ export default function Home() {
     }
     )).data
     console.log(response)
+    setId(response._id)
     setInsight(response)
     setLoading(false)
     setClicked(false)
    }
   }
-  function favHandler(e){
+  async function favHandler(e){
+
     if(fav){
       setFav(false)
+      let response=(await axios.put(`/api/scraper/addtofav?id=${e.target.id}&value=false`)).data
+      console.log(response)
+
+      
     }else{
       setFav(true)
+      let response=(await axios.put(`/api/scraper/addtofav?id=${e.target.id}&value=true`)).data
+      console.log(response)
     }
     
+  }
+  function handleweblink(){
+    setWeblink(true)
+  }
+  function handlemedialink(){
+    setMedialink(true)
   }
   return (
     <>
      <Navbar/>
-      <div className=' flex w-screen h-screen items-center flex-col justify-center '>
+      <div className={` flex w-screen h-screen items-center flex-col justify-center ${weblink? "blur" :""} `}>
      
         <div className='flex flex-col items-center justify-evenly h-40'>
             <input className="text-black" type="text" placeholder="enter website url" value={url} onChange={(e)=>setUrl(e.target.value)}  ></input>
@@ -65,7 +83,6 @@ export default function Home() {
     <div className="flex justify-evenly items-center w-full">
       <div className="flex-1 border p-2">Domain</div>
       <div className="flex-1 border p-2">WordCount</div>
-      <div className="flex-1 border p-2">Favourite</div>
       <div className="flex-1 border p-2">Links</div>
       <div className="flex-1 border p-2">Media</div>
       <div className="flex-1 border p-2">Add to Fav</div>
@@ -78,22 +95,21 @@ export default function Home() {
       <div className={` ${insight ? "" : "invisible" } flex justify-evenly items-center w-full text-xs`}>
         <div className="flex-1 border p-2">{insight?.domain}</div>
         <div className="flex-1 border p-2">{insight?.wordlength}</div>
-        <div className="flex-1 border p-2">{insight?.favorite}</div>
         <div className="flex-1 border p-2">
           {insight ? (
             <div>
               
-              <button className="text-blue-500" id={insight._id} >View hyperlinks</button>
+              <button className="text-blue-500" id={insight._id} onClick={handleweblink} >View hyperlinks</button>
             </div>
           ) : (
             ""
           )}
         </div>
         <div className="flex-1 border p-2"  >
-          {insight ? <button className="text-blue-500" id={insight._id} >View media links</button> : ""}
+          {insight ? <button className="text-blue-500" id={insight._id} onClick={handlemedialink}  >View media links</button> : ""}
         </div>
             <div className={`flex-1 p-2 flex justify-center  ${insight? "" :"invisible"}  `} >
-              <button id={insight._id} onClick={favHandler}  ><Image id={insight._id} src={fav ?  "/star.svg" :"/whitestar.svg" } width={30} height={30} alt="image" ></Image></button>
+              <button id={insight?  insight._id :"" } onClick={favHandler}  ><Image id={insight?  insight._id : "" } src={fav ?  "/star.svg" :"/whitestar.svg" } width={30} height={30} alt="image" ></Image></button>
 
             </div>
       </div>
@@ -101,7 +117,20 @@ export default function Home() {
   </div>
 </div>
 
-    </div>
+  </div>
+
+            {weblink? 
+              <WebLink id={id} resource={"hyperlinks"} setWeblink={setWeblink} />
+
+            
+            : <div></div> }
+
+            {medialink? 
+              <WebLink id={id} resource={"medialinks"} setWeblink={setMedialink} />
+
+            
+            : <div></div> }
+
     </>
 
   )
