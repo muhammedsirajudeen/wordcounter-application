@@ -60,7 +60,7 @@ export default function ViewInsights(){
     }
     return(
         <>
-        <div className="maincontainer flex flex-col items-center justify-center">
+        <div className={`maincontainer flex flex-col items-center justify-center ${medialink? "blur" :""} ${weblink?"blur":""}  `}>
             <div className="flex items-center justify-evenly text-xs w-screen">
                 <div className="flex-1 border p-2">Domain</div>
                 <div className="flex-1 border p-2">WordCount</div>

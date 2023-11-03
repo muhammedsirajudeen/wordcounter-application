@@ -18,7 +18,7 @@ export default function WebLink({resource,id,setWeblink}){
     }
     return(
       
-        <div className="  fixed top-28 left-52 w-screen h-screen  ">
+        <div className="  fixed top-0  bottom-0 w-screen h-screen flex items-center justify-center  ">
      
         <div className="flex weblinkcontainer bg-white flex-col text-black w-96 h-96 rounded-lg items-center ">
           <button onClick={closeHandler} >x</button>
