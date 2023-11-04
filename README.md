@@ -38,3 +38,8 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Project Details 
+
+The Frontend and Backend is created on Next.js except for the scraping logic . The scraping logic is rewritten using python and served using flask in a Docker Container . 
+Right now the backend is running on an ec2 instance . A better option would have been to run it on aws lambda . Also the word count part of BeautifulSoup is not accurate would love to use spacy to improve its accuracy using nlp and tokenizing the words . Also inorder to improve perfomance a caching layer would be awesome as cache invalidation would become a headache as we need the latest data Iam avoiding it from mvp
