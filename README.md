@@ -43,3 +43,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 The Frontend and Backend is created on Next.js except for the scraping logic . The scraping logic is rewritten using python and served using flask in a Docker Container . 
 Right now the backend is running on an ec2 instance . A better option would have been to run it on aws lambda . Also the word count part of BeautifulSoup is not accurate would love to use spacy to improve its accuracy using nlp and tokenizing the words . Also inorder to improve perfomance a caching layer would be awesome as cache invalidation would become a headache as we need the latest data Iam avoiding it from mvp
+Also Entirely client rendered applications would have difficulty showing upon the render 
